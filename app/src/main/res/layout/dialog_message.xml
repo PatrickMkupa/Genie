@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:autofit="http://schemas.android.com/tools"
+    android:background="#000">
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#000">
+        <ImageButton
+            android:id="@+id/closeButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_cancel"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
+            android:background="@android:color/transparent"
+        />
+
+<ImageButton
+    android:id="@+id/shareButton"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:src="@drawable/ic_share"
+    android:background="@android:color/transparent"
+    app:layout_constraintTop_toTopOf="parent"
+    android:layout_marginTop="10dp"
+    android:layout_marginRight="10dp"
+    app:layout_constraintEnd_toEndOf="parent"/>
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_heart"
+            android:background="@android:color/transparent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/shareButton"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="15dp"
+            />
+    </android.support.constraint.ConstraintLayout>
+    <ImageView
+        android:id="@+id/openQuote"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/header"
+        android:layout_marginTop="10dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+      android:src="@drawable/ic_open_quote"
+        />
+    <me.grantland.widget.AutofitTextView
+        android:id="@+id/message"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/openQuote"
+        android:maxLines="6"
+        android:textSize="50sp"
+        autofit:minTextSize ="18sp"
+        android:textAlignment="center"
+
+
+        />
+    <ImageView
+        android:id="@+id/closeQuote"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/message"
+        android:layout_marginTop="10dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:src="@drawable/ic_close_quote"
+        />
+    <TextView
+        android:id="@+id/authorText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/closeQuote"
+        android:textColor="@android:color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
+        android:text=""
+
+        />
+    <View
+        android:layout_width="45dp"
+        android:layout_height="5dp"
+        android:background="#fff"
+        app:layout_constraintWidth_percent="0.4"
+        app:layout_constraintEnd_toStartOf="@id/authorText"
+        app:layout_constraintTop_toBottomOf="@id/closeQuote"
+        android:layout_marginRight="6dp"
+        android:layout_marginTop="17dp"
+     />
+
+</android.support.constraint.ConstraintLayout>

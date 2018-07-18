@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Genie</string>
+
+    <string name="title_activity_splash_screen">Genie</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="slogan">Welcome to the worlds wisdom</string>
+    <string name="collecting">Collecting Power from the universe please wait......</string>
+    <string name="answered">"The world has spoken. Click open to reveal message!"</string>
+    <string name="introText">Namaste,Welcome
+My name is genie.shake device for messages from the world</string>
+</resources>
