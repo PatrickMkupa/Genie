@@ -13,5 +13,6 @@ Genie is fortune telling application that gives the users quotes from the world,
 <li>Kotlin code writing</li>
 <li>Connecting and consuming webservices</li>
 <li>Working with sensors</li>
+<li>Sharing to other applicaitons</li>
 <li>Version control integration</li>
 </ul>
