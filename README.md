@@ -6,6 +6,7 @@ Genie is fortune telling application that gives the users quotes from the world,
 <li>Kotlin - Language</li>
 <li>Fuel -Web service requests</li>
 <li>Glide - Image Porocessing</li>
+ <li>Lottie -Animation</li>
 </ul>
 <h1>Dev Skills Demonstrated</h1>
 <ul>
@@ -15,4 +16,5 @@ Genie is fortune telling application that gives the users quotes from the world,
 <li>Working with sensors</li>
 <li>Sharing to other applicaitons</li>
 <li>Version control integration</li>
+  <li>Animation and Morphing</li>
 </ul>
