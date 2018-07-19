@@ -15,6 +15,7 @@ import android.R.attr.y
 import android.R.attr.x
 import android.app.Dialog
 import android.content.DialogInterface
+import android.content.Intent
 import android.opengl.Visibility
 import android.os.Message
 import android.util.FloatMath
@@ -27,7 +28,10 @@ import com.github.kittinunf.result.Result
 import com.sfyc.ctpv.CountTimeProgressView
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.dialog_message.*
+import org.json.JSONArray
+import org.json.JSONObject
 import java.lang.Boolean
+import java.util.*
 import kotlin.math.sqrt
 
 
@@ -84,8 +88,13 @@ if(isShaked==true){
         //do something with response
         when (result) {
             is Result.Failure -> {
-                message = "Hello Word"
-                author = "me"
+              val fileText =  applicationContext.assets.open("quotes.json").bufferedReader().use { it.readText() }
+                val json = JSONObject(fileText)
+                val qoutes = json.getJSONArray("quotes")
+                val  r = Random()
+                val id1 = r.nextInt(qoutes.length())
+                message = qoutes.getJSONObject(id1).getString("quote");
+                author = qoutes.getJSONObject(id1).getString("author");
             }
             is Result.Success -> {
                 val data = result.get()
@@ -105,13 +114,21 @@ if(isShaked==true){
             openButton.startAnimation(AnimationUtils.loadAnimation(this@MainActivity,R.anim.zoom_in))
             openButton.visibility = View.VISIBLE
             openButton.setOnClickListener({
-                Toast.makeText(this@MainActivity,"click",Toast.LENGTH_SHORT).show();
+               // Toast.makeText(this@MainActivity,"click",Toast.LENGTH_SHORT).show();
 
                 dialog.setContentView(R.layout.dialog_message)
                 dialog.show()
                 dialog.closeButton.setOnClickListener { dialogBack() }
+                dialog.shareButton.setOnClickListener{
+                    val intent = Intent()
+                    intent.action = Intent.ACTION_SEND
+                    intent.putExtra(Intent.EXTRA_TEXT, "$message  \n Written by $author")
+                    intent.type = "text/plain"
+
+                    startActivity(Intent.createChooser(intent, "Please select app: "))  }
                 dialog.message.setText("$message")
                 dialog.authorText.setText("$author")
+                //dialog.favouriteButton.playAnimation()
                 dialog.setOnKeyListener(object :DialogInterface.OnKeyListener{
                     override fun onKey(p0: DialogInterface?, p1: Int, p2: KeyEvent?): kotlin.Boolean {
                         if (p1 == KeyEvent.KEYCODE_BACK){
@@ -152,7 +169,7 @@ if(isShaked==true){
         sensorManager!!.unregisterListener(this)
     }
 private fun dialogBack(){
-    Toast.makeText(this@MainActivity,"back pressed",Toast.LENGTH_SHORT).show()
+   // Toast.makeText(this@MainActivity,"back pressed",Toast.LENGTH_SHORT).show()
     openButton.visibility = View.INVISIBLE
     isShaked = false
     normal.setText(resources.getString(R.string.introText))
