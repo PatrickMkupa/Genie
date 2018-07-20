@@ -18,6 +18,6 @@ Genie is fortune telling application that gives the users quotes from the world,
 <li>Version control integration</li>
  <li>Animation and Morphing</li>
  <li>Writing/Reading to Json file</li>
-  <li>Seesion managers</li>
+  <li>Session managers</li>
  
 </ul>
