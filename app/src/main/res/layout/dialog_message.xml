@@ -33,15 +33,21 @@
     android:layout_marginRight="10dp"
     app:layout_constraintEnd_toEndOf="parent"/>
 
-        <ImageButton
+        <CheckBox
+            android:id="@+id/favButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_heart"
-            android:background="@android:color/transparent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toStartOf="@id/shareButton"
             android:layout_marginTop="10dp"
             android:layout_marginRight="15dp"
+            android:clickable="true"
+            android:paddingBottom="5dp"
+            android:button="@null"
+            android:stateListAnimator="@animator/scale"
+            android:checked="false"
+            android:background="@drawable/fav_icon"
+            android:focusable="true"
             />
     </android.support.constraint.ConstraintLayout>
     <ImageView

@@ -20,6 +20,7 @@ import android.opengl.Visibility
 import android.os.Message
 import android.util.FloatMath
 import android.view.KeyEvent
+import android.view.Menu
 import android.view.View
 import android.view.animation.AnimationUtils
 import com.github.kittinunf.fuel.Fuel
@@ -38,17 +39,18 @@ import kotlin.math.sqrt
 class MainActivity : AppCompatActivity(), SensorEventListener {
     private lateinit var sensorManager: SensorManager
     private val SHAKE_THRESHOLD_GRAVITY = 2.7f
-    private  var count =0
-   private var  isShaked = false;
-    private  lateinit var message: String
-    private lateinit var author:String
-    private lateinit var dialog:Dialog
+    private var count = 0
+    private var isShaked = false;
+    private lateinit var message: String
+    private lateinit var author: String
+    private lateinit var dialog: Dialog
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
 
-        dialog = Dialog(this@MainActivity,R.style.CustomDialogTheme)
+        dialog = Dialog(this@MainActivity, R.style.CustomDialogTheme)
         sensorManager = getSystemService(Context.SENSOR_SERVICE) as SensorManager
 
     }
@@ -59,99 +61,76 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
     override fun onSensorChanged(event: SensorEvent?) {
 
         if (event!!.sensor.type == Sensor.TYPE_ACCELEROMETER) {
-            val x= event!!.values[0]
+            val x = event!!.values[0]
             val y = event.values[1]
-            val z= event.values[2]
+            val z = event.values[2]
 
             val gX = x / SensorManager.GRAVITY_EARTH
             val gY = y / SensorManager.GRAVITY_EARTH
             val gZ = z / SensorManager.GRAVITY_EARTH
-            val gForce  = sqrt(gX * gX + gY * gY + gZ * gZ)
-            if (gForce > SHAKE_THRESHOLD_GRAVITY){
+            val gForce = sqrt(gX * gX + gY * gY + gZ * gZ)
+            if (gForce > SHAKE_THRESHOLD_GRAVITY) {
                 val c = count++
 
-if(isShaked==true){
-    if(openButton.visibility==View.VISIBLE){
-        normal.setText(resources.getString(R.string.answered))
-    }else{
-        normal.setText(resources.getString(R.string.collecting))
-    }
-
-
-   // Toast.makeText(this,"Already shaked "+count++,Toast.LENGTH_SHORT).show()
-}else{
-    isShaked=true
-    countTimeProgressView.visibility =View.VISIBLE
-    countTimeProgressView.startCountTimeAnimation()
-    normal.setText(resources.getString(R.string.collecting))
-    Fuel.get("https://talaikis.com/api/quotes/random/").responseJson() { request, response, result ->
-        //do something with response
-        when (result) {
-            is Result.Failure -> {
-              val fileText =  applicationContext.assets.open("quotes.json").bufferedReader().use { it.readText() }
-                val json = JSONObject(fileText)
-                val qoutes = json.getJSONArray("quotes")
-                val  r = Random()
-                val id1 = r.nextInt(qoutes.length())
-                message = qoutes.getJSONObject(id1).getString("quote");
-                author = qoutes.getJSONObject(id1).getString("author");
-            }
-            is Result.Success -> {
-                val data = result.get()
-                message= data.getString("quote").trim()
-                author = data.getString("author").trim()
-
-
-            }
-        }
-    }
-    countTimeProgressView.addOnEndListener(object: CountTimeProgressView.OnEndListener{
-
-        override fun onAnimationEnd() {
-        normal.setText(resources.getString(R.string.answered))
-            countTimeProgressView.startAnimation(AnimationUtils.loadAnimation(this@MainActivity,R.anim.fade_out))
-            countTimeProgressView.visibility = View.INVISIBLE
-            openButton.startAnimation(AnimationUtils.loadAnimation(this@MainActivity,R.anim.zoom_in))
-            openButton.visibility = View.VISIBLE
-            openButton.setOnClickListener({
-               // Toast.makeText(this@MainActivity,"click",Toast.LENGTH_SHORT).show();
-
-                dialog.setContentView(R.layout.dialog_message)
-                dialog.show()
-                dialog.closeButton.setOnClickListener { dialogBack() }
-                dialog.shareButton.setOnClickListener{
-                    val intent = Intent()
-                    intent.action = Intent.ACTION_SEND
-                    intent.putExtra(Intent.EXTRA_TEXT, "$message  \n Written by $author")
-                    intent.type = "text/plain"
-
-                    startActivity(Intent.createChooser(intent, "Please select app: "))  }
-                dialog.message.setText("$message")
-                dialog.authorText.setText("$author")
-                //dialog.favouriteButton.playAnimation()
-                dialog.setOnKeyListener(object :DialogInterface.OnKeyListener{
-                    override fun onKey(p0: DialogInterface?, p1: Int, p2: KeyEvent?): kotlin.Boolean {
-                        if (p1 == KeyEvent.KEYCODE_BACK){
-                         dialogBack()
-                        }
-                        return true
+                if (isShaked == true) {
+                    if (openButton.visibility == View.VISIBLE) {
+                        normal.setText(resources.getString(R.string.answered))
+                    } else {
+                        normal.setText(resources.getString(R.string.collecting))
                     }
 
-                })
 
-            })
+                    // Toast.makeText(this,"Already shaked "+count++,Toast.LENGTH_SHORT).show()
+                } else {
+                    isShaked = true
+                    countTimeProgressView.visibility = View.VISIBLE
+                    countTimeProgressView.startCountTimeAnimation()
+                    normal.setText(resources.getString(R.string.collecting))
+                    Fuel.get("https://talaikis.com/api/quotes/random/").responseJson() { request, response, result ->
+                        //do something with response
+                        when (result) {
+                            is Result.Failure -> {
+                                val fileText = applicationContext.assets.open("quotes.json").bufferedReader().use { it.readText() }
+                                val json = JSONObject(fileText)
+                                val qoutes = json.getJSONArray("quotes")
+                                val r = Random()
+                                val id1 = r.nextInt(qoutes.length())
+                                message = qoutes.getJSONObject(id1).getString("quote");
+                                author = qoutes.getJSONObject(id1).getString("author");
+                            }
+                            is Result.Success -> {
+                                val data = result.get()
+                                message = data.getString("quote").trim()
+                                author = data.getString("author").trim()
 
-        }
 
-        override fun onClick(overageTime: Long) {
-            TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-        }
+                            }
+                        }
+                    }
 
-    })
+                    countTimeProgressView.addOnEndListener(object : CountTimeProgressView.OnEndListener {
+
+                        override fun onAnimationEnd() {
+                            normal.setText(resources.getString(R.string.answered))
+                            countTimeProgressView.startAnimation(AnimationUtils.loadAnimation(this@MainActivity, R.anim.fade_out))
+                            countTimeProgressView.visibility = View.INVISIBLE
+                            openButton.startAnimation(AnimationUtils.loadAnimation(this@MainActivity, R.anim.zoom_in))
+                            openButton.visibility = View.VISIBLE
+                            openButton.setOnClickListener({
+                             openDialog()
+
+                            })
+
+                        }
+
+                        override fun onClick(overageTime: Long) {
+                            TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+                        }
+
+                    })
 
 
-
-}
+                }
                 //numberShake.setText("Number of shakes " +c)
 
             }
@@ -159,6 +138,7 @@ if(isShaked==true){
             //Toast.makeText(this,"movement",Toast.LENGTH_SHORT).show()
         }
     }
+
     override fun onResume() {
         super.onResume()
         sensorManager!!.registerListener(this, sensorManager!!.getDefaultSensor(Sensor.TYPE_ACCELEROMETER), SensorManager.SENSOR_DELAY_NORMAL)
@@ -168,11 +148,46 @@ if(isShaked==true){
         super.onPause()
         sensorManager!!.unregisterListener(this)
     }
-private fun dialogBack(){
-   // Toast.makeText(this@MainActivity,"back pressed",Toast.LENGTH_SHORT).show()
-    openButton.visibility = View.INVISIBLE
-    isShaked = false
-    normal.setText(resources.getString(R.string.introText))
-    dialog.dismiss()
-}
+
+    private fun dialogBack() {
+        // Toast.makeText(this@MainActivity,"back pressed",Toast.LENGTH_SHORT).show()
+        openButton.visibility = View.INVISIBLE
+        isShaked = false
+        normal.setText(resources.getString(R.string.introText))
+        dialog.dismiss()
+    }
+
+    private fun openDialog() {
+        dialog.setContentView(R.layout.dialog_message)
+        dialog.show()
+        dialog.closeButton.setOnClickListener { dialogBack() }
+        dialog.shareButton.setOnClickListener {
+            val intent = Intent()
+            intent.action = Intent.ACTION_SEND
+            intent.putExtra(Intent.EXTRA_TEXT, "$message  \n Written by $author")
+            intent.type = "text/plain"
+
+            startActivity(Intent.createChooser(intent, "Please select app: "))
+        }
+        dialog.message.setText("$message")
+        dialog.authorText.setText("$author")
+
+
+        //dialog.favouriteButton.playAnimation()
+        dialog.setOnKeyListener(object : DialogInterface.OnKeyListener {
+            override fun onKey(p0: DialogInterface?, p1: Int, p2: KeyEvent?): kotlin.Boolean {
+                if (p1 == KeyEvent.KEYCODE_BACK) {
+                    dialogBack()
+                }
+                return true
+            }
+
+        })
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): kotlin.Boolean {
+        val inflater = menuInflater
+        inflater.inflate(R.menu.main_menu,menu)
+        return super.onCreateOptionsMenu(menu)
+    }
 }

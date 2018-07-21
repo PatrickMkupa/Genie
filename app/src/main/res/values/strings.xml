@@ -9,4 +9,7 @@
     <string name="answered">"The world has spoken. Click open to reveal message!"</string>
     <string name="introText">Namaste,Welcome
 My name is genie.shake device for messages from the world</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

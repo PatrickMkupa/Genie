@@ -40,7 +40,7 @@
         android:id="@+id/genieIccon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/ic_geniecolour"
+        android:src="@drawable/av_geniecolour"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0"
         app:layout_constraintStart_toStartOf="parent"
