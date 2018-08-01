@@ -26,17 +26,32 @@ class ColourAdapter(private val items: List<Item>, private val context: Context,
         val item = items.get(position)
 
         holder.resorce.setBackgroundColor(Color.parseColor(item.resource))
-        if (item.resource.equals(SharedPrefs.retrieveAvatar(context))) {
+        if (item.resource.equals(SharedPrefs.retrieveSecColour(context))) {
 
             item.isSelected = true;
         } else {
 
             item.isSelected = false
         }
+        if (item.isSelected){
+            holder.indicator.visibility = View.VISIBLE
+        }else{
+            holder.indicator.visibility = View.INVISIBLE
+        }
         holder.resorce.setOnClickListener {
-            SharedPrefs.saveSecColour(context, item.resource)
-            waveHeader.startColor = Color.parseColor(item.resource)
-            waveHeader.closeColor = Color.parseColor(item.resource)
+            items.forEach {
+                if(item.resource.equals(it.resource)){
+                    SharedPrefs.saveSecColour(context, item.resource)
+                    waveHeader.startColor = Color.parseColor(item.resource)
+                    waveHeader.closeColor = Color.parseColor(item.resource)
+                    it.isSelected = true
+                    holder.indicator.visibility = View.VISIBLE
+                }else{
+                    it.isSelected = false
+                    holder.indicator.visibility = View.INVISIBLE
+                }
+            }
+
             notifyDataSetChanged()
         }
 
