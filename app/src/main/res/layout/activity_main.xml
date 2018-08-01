@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#000"
+    android:id="@+id/mainLayout"
     tools:context=".MainActivity">
 
     <android.support.constraint.Guideline
@@ -37,10 +38,10 @@
 
 
     <ImageView
-        android:id="@+id/genieIccon"
+        android:id="@+id/genieIcon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/av_geniecolour"
+
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0"
         app:layout_constraintStart_toStartOf="parent"
@@ -81,7 +82,7 @@
         app:layout_constraintHorizontal_bias="0.7"
         app:layout_constraintTop_toBottomOf="@id/guideline2"
         app:layout_constraintStart_toStartOf="parent"
-        app:markBallColor="#002FFF"
+        app:markBallColor="@color/colorPrimary"
         app:markBallFlag="true"
         app:markBallWidth="5dp"
         app:startAngle="0"

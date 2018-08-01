@@ -1,0 +1,60 @@
+{
+  "items": [
+    {
+      "resource": "av_agent1",
+      "name": "R.string.agent"
+    },
+    {
+      "resource": "av_beancolour",
+      "name": "R.string.bean"
+    },
+    {
+      "resource": "av_blossom",
+      "name": "R.string.blossom"
+    },
+    {
+      "resource": "av_cinderella",
+      "name": "R.string.cinderella"
+    },
+    {
+      "resource": "av_dede",
+      "name": "R.string.dede"
+    },
+    {
+      "resource": "av_geniecolour",
+      "name": "R.string.genie"
+    },
+    {
+      "resource": "av_goku",
+      "name": "R.string.goku"
+    },
+    {
+      "resource": "av_kimpossible",
+      "name": "R.string.kim"
+    },
+    {
+      "resource": "av_lilo",
+      "name": "R.string.lilo"
+    },
+    {
+      "resource": "av_optimusprime",
+      "name": "R.string.optimus"
+    },
+    {
+      "resource": "av_raven",
+      "name": "R.string.raven"
+    },
+    {
+      "resource": "av_spongebob",
+      "name": "R.string.sponge"
+    },
+    {
+      "resource": "av_stewiegriffin",
+      "name": "R.string.stweie"
+    },
+    {
+      "resource": "av_tiana",
+      "name": "R.string.tiana"
+    }
+  ]
+}

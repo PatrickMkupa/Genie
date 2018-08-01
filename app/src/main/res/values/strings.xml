@@ -2,14 +2,32 @@
     <string name="app_name">Genie</string>
 
     <string name="title_activity_splash_screen">Genie</string>
-    <string name="dummy_button">Dummy Button</string>
-    <string name="dummy_content">DUMMY\nCONTENT</string>
     <string name="slogan">Welcome to the worlds wisdom</string>
     <string name="collecting">Collecting Power from the universe please wait......</string>
     <string name="answered">"The world has spoken. Click open to reveal message!"</string>
     <string name="introText">Namaste,Welcome
-My name is genie.shake device for messages from the world</string>
+            My name is genie.shake device for messages from the world</string>
+    <string name="avatar">Change Avatar</string>
+    <string name="background">Change Background</string>
+    <string name="color">Change Colour</string>
+    <string name="about">About Genie</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!-- region avatar names-->
+    <string name="agent">Agent 1</string>
+    <string name="bean">Mr Bean</string>
+    <string name="blossom">Blossom</string>
+    <string name="cinderella">Cinderella</string>
+    <string name="dede">Dede</string>
+    <string name="genie">Genie</string>
+    <string name="goku">Goku</string>
+    <string name="kim">Kim</string>
+    <string name="lilo">Lilo</string>
+    <string name="optimus">Optimus</string>
+    <string name="raven">Raven</string>
+    <string name="sponge">Sponge Bob</string>
+    <string name="stweie">Stewie</string>
+    <string name="tiana">Tiana</string>
+    <!-- endregion-->
+
 </resources>

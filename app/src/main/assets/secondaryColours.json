@@ -1,0 +1,64 @@
+{
+  "items": [
+    {
+      "resource": "#9a0007",
+      "name": "red"
+    },
+    {
+      "resource": "#8c0032",
+      "name": "pink"
+    },
+    {
+      "resource": "#4a0072",
+      "name": "purple"
+    },
+    {
+      "resource": "#140078",
+      "name": "deep_purple"
+    },
+    {
+      "resource": "#001970",
+      "name": "indigo"
+    },
+    {
+      "resource": "#004ba0",
+      "name": "blue"
+    },
+    {
+      "resource": "#004c40",
+      "name": "teal"
+    },
+    {
+      "resource": "#00600f",
+      "name": "green"
+    },
+    {
+      "resource": "#bb4d00",
+      "name": "orange"
+    },
+    {
+      "resource": "#c41c00",
+      "name": "deep_orange"
+    },
+    {
+      "resource": "#616161",
+      "name": "grey"
+    },
+    {
+      "resource": "#b0003a",
+      "name": "pink1"
+    },
+    {
+      "resource": "#4a148c",
+      "name": "purple1"
+    },
+    {
+      "resource": "#d50000",
+      "name": "red1"
+    },
+    {
+      "resource": "#3F51B5",
+      "name": "default"
+    }
+  ]
+}

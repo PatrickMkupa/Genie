@@ -16,12 +16,12 @@ import android.R.attr.x
 import android.app.Dialog
 import android.content.DialogInterface
 import android.content.Intent
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.opengl.Visibility
 import android.os.Message
 import android.util.FloatMath
-import android.view.KeyEvent
-import android.view.Menu
-import android.view.View
+import android.view.*
 import android.view.animation.AnimationUtils
 import com.github.kittinunf.fuel.Fuel
 import com.github.kittinunf.fuel.android.extension.responseJson
@@ -31,6 +31,10 @@ import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.dialog_message.*
 import org.json.JSONArray
 import org.json.JSONObject
+import za.co.macmobile.genie.util.SharedPrefs
+import za.co.macmobile.genie.util.StatusBarUtil
+import za.co.macmobile.genie.util.StatusBarUtil.mixtureColor
+
 import java.lang.Boolean
 import java.util.*
 import kotlin.math.sqrt
@@ -44,16 +48,33 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
     private lateinit var message: String
     private lateinit var author: String
     private lateinit var dialog: Dialog
+    private lateinit var context:Context
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        context = this
 
 
         dialog = Dialog(this@MainActivity, R.style.CustomDialogTheme)
+
         sensorManager = getSystemService(Context.SENSOR_SERVICE) as SensorManager
+        val id = context.resources.getIdentifier(SharedPrefs.retrieveAvatar(context), "drawable", context.packageName)
+        val drawable = context.getResources().getDrawable(id)
+        val secondaryColor = Color.parseColor(SharedPrefs.retrieveSecColour(context))
+        genieIcon.setImageDrawable(drawable)
+        supportActionBar?.setBackgroundDrawable(ColorDrawable(secondaryColor))
+        window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
+        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
+        window.statusBarColor = mixtureColor(secondaryColor, 0.9f)
+        dialog.window.statusBarColor = mixtureColor(secondaryColor, 0.9f)
+
+        openButton.setBackgroundColor(secondaryColor)
+        countTimeProgressView.borderDrawColor = secondaryColor
+        countTimeProgressView.markBallColor = secondaryColor
 
     }
+
 
     override fun onAccuracyChanged(p0: Sensor?, p1: Int) {
     }
@@ -79,13 +100,12 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
                         normal.setText(resources.getString(R.string.collecting))
                     }
 
-
-                    // Toast.makeText(this,"Already shaked "+count++,Toast.LENGTH_SHORT).show()
                 } else {
                     isShaked = true
                     countTimeProgressView.visibility = View.VISIBLE
                     countTimeProgressView.startCountTimeAnimation()
                     normal.setText(resources.getString(R.string.collecting))
+
                     Fuel.get("https://talaikis.com/api/quotes/random/").responseJson() { request, response, result ->
                         //do something with response
                         when (result) {
@@ -189,5 +209,19 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
         val inflater = menuInflater
         inflater.inflate(R.menu.main_menu,menu)
         return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): kotlin.Boolean {
+
+        when (item!!.itemId) {
+            R.id.action_settings->{
+               val intent = Intent(this,SettingActivity::class.java)
+                startActivity(intent)
+                finish()
+            }
+
+
+        }
+        return super.onOptionsItemSelected(item)
     }
 }
